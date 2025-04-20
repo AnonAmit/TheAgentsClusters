@@ -11,7 +11,7 @@ agents:
 
 memory:
   # Choose backend: 'redis', 'vector_db', 'json_file'
-  backend: 'redis' # Example, change as needed
+  backend: 'json_file' # Example, change as needed
   redis:
     host: 'localhost'
     port: 6379
