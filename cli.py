@@ -19,7 +19,7 @@ async def main():
     parser.add_argument(
         "-d", "--details",
         type=str,
-        help="Assign an initial task using a JSON string for detailed configuration (e.g., '{"url": "http://example.com", "action": "scrape_text"}'). Overrides --task if provided."
+        help='Assign an initial task using a JSON string for detailed configuration (e.g., {\'url\': \'http://example.com\', \'action\': \'scrape_text\'}). Overrides --task if provided.'
     )
     parser.add_argument(
         "-c", "--config", 
