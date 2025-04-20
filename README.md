@@ -46,7 +46,7 @@ TAC follows a hierarchical structure:
 
 1.  **Clone the repository:**
     ```bash
-    git clone <repository-url>
+    git clone https://github.com/AnonAmit/TheAgentsClusters
     cd tac-project # Or your chosen directory name
     ```
 
