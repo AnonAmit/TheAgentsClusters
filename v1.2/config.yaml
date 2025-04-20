@@ -1,0 +1,68 @@
+# config.yaml
+# Configuration for THE AGENTS CLUSTER [TAC]
+
+master_controller:
+  task_queue_limit: 100
+  max_concurrent_agents: 5
+
+agents:
+  default_memory_type: 'short_term' # 'short_term' or 'long_term'
+  allow_dynamic_sub_agents: true
+
+memory:
+  # Choose backend: 'redis', 'vector_db', 'json_file'
+  backend: 'redis' # Example, change as needed
+  redis:
+    host: 'localhost'
+    port: 6379
+    db: 0
+  vector_db:
+    # Configuration for ChromaDB, Weaviate, etc.
+    provider: 'chromadb' # example
+    # ChromaDB specific settings:
+    path: './tac_chroma_store' # Path for persistent storage (on-disk)
+    # Or use in-memory: ':memory:' (not recommended for persistence)
+    collection_name: 'tac_agent_memory'
+    # embedding_function: 'default' # e.g., SentenceTransformer (requires pip install sentence-transformers)
+    # distance_function: 'cosine' # e.g., l2, ip, cosine
+  json_file:
+    path: './tac_memory.json'
+
+llm:
+  # Choose provider: 'openai', 'anthropic', 'google', etc.
+  provider: 'openai'
+  default_model: 'gpt-4-turbo-preview' # Example model, adjust as needed
+  # API keys should be set via environment variables (e.g., OPENAI_API_KEY, ANTHROPIC_API_KEY, GOOGLE_API_KEY)
+  request_timeout: 120 # seconds
+
+  # --- OpenAI Specific --- (Optional: Can add specific model aliases or params here)
+  openai_models:
+      default: 'gpt-4-turbo-preview'
+      fast: 'gpt-3.5-turbo'
+
+  # --- Anthropic Specific --- 
+  anthropic_models:
+      default: 'claude-3-opus-20240229'
+      fast: 'claude-3-haiku-20240307'
+      # Add other Claude models as needed
+  # anthropic_api_version: '2023-06-01' # Example, if needed
+
+  # --- Google Gemini Specific --- 
+  google_models:
+       default: 'gemini-1.5-flash-latest'
+       pro: 'gemini-1.5-pro-latest'
+       # Add other models like gemini-pro-vision etc. if needed
+
+browser:
+  # Choose provider: 'playwright', 'selenium'
+  provider: 'playwright'
+  headless: true
+  # Playwright specific options
+  playwright:
+    browser_type: 'chromium' # 'chromium', 'firefox', 'webkit'
+    user_agent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36 TAC_Browser_Agent/1.0'
+
+logging:
+  level: 'INFO' # DEBUG, INFO, WARNING, ERROR, CRITICAL
+  format: '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+  log_file: 'tac_app.log' 
